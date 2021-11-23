@@ -23,7 +23,7 @@ while (true)
 
     var input = Console.ReadKey();
 
-    if (input.Key == ConsoleKey.D1)
+    if (input.Key == ConsoleKey.D1 || input.Key == ConsoleKey.NumPad1)
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Blue;
@@ -56,7 +56,7 @@ while (true)
 
     }
 
-    if (input.Key==ConsoleKey.D2)
+    if (input.Key==ConsoleKey.D2 || input.Key == ConsoleKey.NumPad2)
     {
         Console.Clear();
         
@@ -81,7 +81,7 @@ while (true)
 
     }
 
-    if (input.Key == ConsoleKey.D3)
+    if (input.Key == ConsoleKey.D3 || input.Key == ConsoleKey.NumPad3)
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Blue;
@@ -117,7 +117,7 @@ while (true)
         Console.ReadKey();
         Console.Clear();
     }
-    if (input.Key == ConsoleKey.D0)
+    if (input.Key == ConsoleKey.D0 || input.Key == ConsoleKey.NumPad0)
     {
         Console.Clear();
         Console.WriteLine("Are you sure you want to exit? y/n");
@@ -126,8 +126,6 @@ while (true)
         {
             break;
         }
-        else
-            continue;
     }
 
 }
