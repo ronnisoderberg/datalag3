@@ -83,6 +83,7 @@ while (true)
 
     if (input.Key == ConsoleKey.D3 || input.Key == ConsoleKey.NumPad3)
     {
+        bool check = true;
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("-------Add new package-------\n");
@@ -91,11 +92,41 @@ while (true)
 
         Console.WriteLine($"You are restaurant number {rest.Id}. ({rest.Name})");
 
-        Console.WriteLine("\nEnter description:");
-        var description = Console.ReadLine();
+        string description = string.Empty;
+        while (check)
+        {
+            Console.WriteLine("\nEnter description:");
+            if (Console.ReadLine().Length<2)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nThe name you have entered is not valid. Please try again.");
+                Console.ResetColor();
+            }
+            else
+            {
+                description = Console.ReadLine();
+                check = false;
+            }
+        }
 
-        Console.WriteLine("\nEnter price in numbers:");
-        var price = Int32.Parse(Console.ReadLine());
+
+        check = true;
+        int price = 0;
+        while (check)
+        {
+            Console.WriteLine("\nEnter price in numbers:");
+            if (Int32.TryParse(Console.ReadLine(), out price))
+            {
+                check = false;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nThe price you have entered is not valid. Please try again.");
+                Console.ResetColor();
+            }
+
+        }
 
         Console.WriteLine("\nEnter expiredate as yyyy/mm/dd");
         var expdate = DateTime.Parse(Console.ReadLine());
