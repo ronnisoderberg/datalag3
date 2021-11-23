@@ -11,6 +11,12 @@ namespace DataLayer.Backend
 {
     public class RestaurantBackend
     {
+
+        public Restaurant GetRestaurantInfo(int id)
+        {
+            using var ctx = new FoodpackDbContext();
+            return ctx.Restaurants.Find(id);
+        }
         public List<Foodpackage> GetSoldFoodpacks(int restaurantId)
         {
             var ctx = new FoodpackDbContext();
@@ -19,6 +25,20 @@ namespace DataLayer.Backend
                 .Include(f => f.Order)
                 .Include(f => f.Restaurant)
                 .Where(f => f.Restaurant.Id == restaurantId && f.Order != null)
+                .OrderBy(f => f.Restaurant.Id)
+                .ToList();
+
+            return query;
+
+        }
+        public List<Foodpackage> GetUnSoldFoodpacks(int restaurantId)
+        {
+            var ctx = new FoodpackDbContext();
+
+            var query = ctx.Foodpackages
+                .Include(f => f.Order)
+                .Include(f => f.Restaurant)
+                .Where(f => f.Restaurant.Id == restaurantId && f.Order == null)
                 .OrderBy(f => f.Restaurant.Id)
                 .ToList();
 
