@@ -7,7 +7,7 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+          
             var userBackend = new UserBackend();
             var adminBackend = new AdminBackend();
             var restaurantBackend = new RestaurantBackend();
