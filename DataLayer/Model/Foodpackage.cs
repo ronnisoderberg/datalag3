@@ -20,5 +20,18 @@ namespace DataLayer.Model
         public Order Order { get; set; }
         public ICollection<Foodattribute> Foodattribute { get; set; }
 
+
+        public override string ToString()
+        {
+            return $"Description: {Description}\n" +
+                $"Price: {Price}\n" +
+                $"Expiredate: {ExpireDate.Date}\n" +
+                $"Restaurant: {Restaurant.Name}\n" +
+                (Order == null
+                    ? "Sold date:Not Sold\n"
+                    : $"Sold date:{Order.OrderDate.ToShortDateString()}\n") +
+                      $"--------------------------------";
+
+        }
     }
 }
