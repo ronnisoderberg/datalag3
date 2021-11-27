@@ -63,7 +63,6 @@ namespace DataLayer.Backend
             ctx.SaveChanges();
 
         }
-
         public double GetMonthlyProfit(Restaurant restaurant, DateTime date)
         {
             var ctx = new FoodpackDbContext();
