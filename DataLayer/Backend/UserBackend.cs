@@ -24,8 +24,7 @@ namespace DataLayer.Backend
                 .ToList();
 
             return query;
-        }
-
+        }   
         public Order BuyFoodpack(List<Foodpackage> orderlist) 
         {
             var ctx = new FoodpackDbContext();
