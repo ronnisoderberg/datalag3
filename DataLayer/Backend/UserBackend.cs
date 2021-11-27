@@ -25,6 +25,31 @@ namespace DataLayer.Backend
 
             return query;
         }
+       public List<Foodpackage> GetFoodpackagesForCostummer(int id)
+        {
+            var ctx = new FoodpackDbContext();
+
+            var query = ctx.Foodpackages
+                .Include(f => f.Category)
+                .Include(f => f.Restaurant)
+                .Include(a => a.Foodattribute)
+                .OrderBy(f => f.Price)
+                .Where(f => f.Order.Costumer.Id == id
+                && f.Order != null)
+                .ToList();
+
+            return query;
+        }
+
+       
+        //Hämtar Objektet användaren med den unika ID nycklen som finns i tabellen. 
+        public Costumer GetCostumer(int id)
+        {
+            var ctx = new FoodpackDbContext();
+
+            return ctx.Costumers.Find(id);
+        }
+
 
         public Order BuyFoodpack(List<Foodpackage> orderlist) 
         {

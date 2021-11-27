@@ -1,5 +1,6 @@
 ﻿using System.Threading.Channels;
 using DataLayer.Backend;
+using DataLayer.Model;
 
 
 bool loop = true;
@@ -8,6 +9,8 @@ int idVal;
 
 var resturant = new RestaurantBackend();
 var user = new UserBackend();
+var userlogin = user.GetCostumer(1);
+
 while (loop)
 {
     Console.Clear();
@@ -36,7 +39,11 @@ while (loop)
             if (listaOkptaAttKopa.Any(x=>x.Id == idVal))
             {
                 Console.WriteLine("Giltigt val");
-                var pack = listaOkptaAttKopa.FirstOrDefault(x => x.Id == idVal);
+                var foodpacks = new List<Foodpackage>();
+                foodpacks.Add(listaOkptaAttKopa.FirstOrDefault(x => x.Id == idVal));
+                user.BuyFoodpack(foodpacks);
+
+
             }
             else
             {
@@ -50,7 +57,10 @@ while (loop)
 
 
         case 3:
+            Console.WriteLine("Dina köpta matlådor ");
 
+            var listKöpta = user.GetFoodpackagesForCostummer(userlogin.Id);
+            listKöpta.ForEach(x => Console.WriteLine(x));
 
 
             Console.WriteLine("(tryck på valfri tangent)");
