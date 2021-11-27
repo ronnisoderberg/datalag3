@@ -23,7 +23,9 @@ namespace DataLayer.Model
 
         public override string ToString()
         {
-            return $"Description: {Description}\n" +
+            return 
+                $"Matpacket ID: {Id}\n" +
+                $"Description: {Description}\n" +
                 $"Price: {Price}\n" +
                 $"Expiredate: {ExpireDate.Date}\n" +
                 $"Restaurant: {Restaurant.Name}\n" +
