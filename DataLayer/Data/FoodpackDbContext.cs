@@ -34,12 +34,12 @@ namespace DataLayer.Data
         {
             var costumers = new List<User>
             {
-                new() {Name = "Anna Andersson" },
-                new() {Name = "Bertil Bengtsson" },
-                new() {Name = "Daniel Davidsson" },
-                new() {Name = "Elin Eriksson" },
-                new() {Name = "Frida Fredriksson" },
-                new() {Name = "Gerd Götesson" }
+                new() {Name = "Anna Andersson" , Username = "AAndersson", Password = "Anna123"},
+                new() {Name = "Bertil Bengtsson", Username = "BBengtsson", Password = "Anna123"},
+                new() {Name = "Daniel Davidsson" ,Username = "DDavidsson", Password = "Daniel123"},
+                new() {Name = "Elin Eriksson" ,Username = "EEriksson", Password = "Elin123"},
+                new() {Name = "Frida Fredriksson" ,Username = "FFredriksson", Password = "Frida123" },
+                new() {Name = "Gerd Götesson" ,Username = "GGötesson", Password = "Gerd123"}
             };
             AddRange(costumers);
 
