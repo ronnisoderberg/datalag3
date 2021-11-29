@@ -11,7 +11,14 @@ namespace DataLayer.Backend
 {
     public class RestaurantBackend
     {
-
+        //requires an User ID
+        //and returns the restaurant that this user is managing
+        public Restaurant GetRestaurant(int userid)
+        {
+            using var ctx = new FoodpackDbContext();
+            return ctx.Restaurants.FirstOrDefault(x => x.User.Id == userid);
+        }
+        //returns the restaurant with the given ID
         public Restaurant GetRestaurantInfo(int id)
         {
             using var ctx = new FoodpackDbContext();
