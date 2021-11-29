@@ -34,7 +34,7 @@ namespace DataLayer.Backend
                 .Include(f => f.Restaurant)
                 .Include(a => a.Foodattribute)
                 .OrderBy(f => f.Price)
-                .Where(f => f.Order.Costumer.Id == id
+                .Where(f => f.Order.User.Id == id
                 && f.Order != null)
                 .ToList();
 
@@ -43,11 +43,11 @@ namespace DataLayer.Backend
 
        
         //Hämtar Objektet användaren med den unika ID nycklen som finns i tabellen. 
-        public Costumer GetCostumer(int id)
+        public User GetCostumer(int id)
         {
             var ctx = new FoodpackDbContext();
 
-            return ctx.Costumers.Find(id);
+            return ctx.Users.Find(id);
         }
 
 
@@ -56,7 +56,7 @@ namespace DataLayer.Backend
             var ctx = new FoodpackDbContext();
 
             //user is set to ID 1
-            var order = new Order() { OrderDate = DateTime.Today, User = ctx.Costumers.Find(1)};
+            var order = new Order() { OrderDate = DateTime.Today, User = ctx.Users.Find(1)};
             double orderPriceSum = 0;
 
             foreach (var o in orderlist)

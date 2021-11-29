@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataLayer.Backend;
 using DataLayer.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ namespace DataLayer.Data
     {
         public DbSet<Ban> Bans { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<User> Costumers { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Foodattribute> Foodattributes { get; set; }
         public DbSet<Foodpackage> Foodpackages { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -30,25 +31,28 @@ namespace DataLayer.Data
             }
         }
 
-        public void Seed()
+        public void Seed() 
         {
-            var costumers = new List<User>
+            var users = new List<User>
             {
-                new() {Name = "Anna Andersson" , Username = "AAndersson", Password = "Anna123"},
+                new() {Name = "Anna Andersson" , Username = "AAndersson", Password = "Anna123",},
                 new() {Name = "Bertil Bengtsson", Username = "BBengtsson", Password = "Anna123"},
                 new() {Name = "Daniel Davidsson" ,Username = "DDavidsson", Password = "Daniel123"},
                 new() {Name = "Elin Eriksson" ,Username = "EEriksson", Password = "Elin123"},
                 new() {Name = "Frida Fredriksson" ,Username = "FFredriksson", Password = "Frida123" },
-                new() {Name = "Gerd Götesson" ,Username = "GGötesson", Password = "Gerd123"}
+                new() {Name = "Gerd Götesson" ,Username = "GGötesson", Password = "Gerd123"},
+                new() {Name = "McDonalds",Username = "McDonaldsUsername", Password = "McDonaldsPassword"},
+                new() {Name = "Subway",Username = "SubwayUsername", Password = "SubwayPassword"},
+                new() {Name = "Starbucks",Username = "StarbucksUsername", Password = "StarbucksPassword"},
             };
-            AddRange(costumers);
+            AddRange(users);
 
             var restaurants = new List<Restaurant>
             {
                 new() {Name = "Max", Phonenumber = "035102030"},
-                new() {Name = "McDonalds" , Phonenumber = "03512345"},
-                new() {Name = "Subway"},
-                new() {Name = "Starbucks"},
+                new() {Name = "McDonalds" , Phonenumber = "03512345", User = users[7]},
+                new() {Name = "Subway", User = users[8]},
+                new() {Name = "Starbucks", User = users[9]},
             };
             AddRange(restaurants);
 
@@ -62,9 +66,9 @@ namespace DataLayer.Data
 
             var orders = new Order[]
             {
-                new(){OrderDate = DateTime.Today, User = costumers[2]},
-                new(){OrderDate = DateTime.Today, User = costumers[0]},
-                new(){OrderDate = DateTime.Today, User = costumers[4]},
+                new(){OrderDate = DateTime.Today, User = users[2]},
+                new(){OrderDate = DateTime.Today, User = users[0]},
+                new(){OrderDate = DateTime.Today, User = users[4]},
                 
             };
             AddRange(orders);
