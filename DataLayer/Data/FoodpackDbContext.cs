@@ -14,7 +14,7 @@ namespace DataLayer.Data
     {
         public DbSet<Ban> Bans { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Costumer> Costumers { get; set; }
+        public DbSet<User> Costumers { get; set; }
         public DbSet<Foodattribute> Foodattributes { get; set; }
         public DbSet<Foodpackage> Foodpackages { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -32,7 +32,7 @@ namespace DataLayer.Data
 
         public void Seed()
         {
-            var costumers = new List<Costumer>
+            var costumers = new List<User>
             {
                 new() {Name = "Anna Andersson" },
                 new() {Name = "Bertil Bengtsson" },
@@ -62,9 +62,9 @@ namespace DataLayer.Data
 
             var orders = new Order[]
             {
-                new(){OrderDate = DateTime.Today, Costumer = costumers[2]},
-                new(){OrderDate = DateTime.Today, Costumer = costumers[0]},
-                new(){OrderDate = DateTime.Today, Costumer = costumers[4]},
+                new(){OrderDate = DateTime.Today, User = costumers[2]},
+                new(){OrderDate = DateTime.Today, User = costumers[0]},
+                new(){OrderDate = DateTime.Today, User = costumers[4]},
                 
             };
             AddRange(orders);

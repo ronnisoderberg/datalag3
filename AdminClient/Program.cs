@@ -1,21 +1,9 @@
-﻿
-
-
-using System.ComponentModel.Design;
-using System.Dynamic;
-using System.Text;
-using System.Threading.Channels;
-using DataLayer.Backend;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-
+﻿using DataLayer.Backend;
 
 var adminBackend = new AdminBackend();
 var userBackend = new UserBackend();
 
-var adminMenu = true;
-
-while (adminMenu)
+while (true)
 {
     Console.Clear();
     Console.WriteLine("Hallo Admin! Select an option below\n");
@@ -25,17 +13,14 @@ while (adminMenu)
     Console.WriteLine("[4] Add new restaurants and info");
     Console.WriteLine("[5] Change a restaurants info");
 
-    var readkey = Console.ReadKey(); 
+    var readkey = Console.ReadKey();
 
 
     if (readkey.Key == ConsoleKey.D1 || readkey.Key == ConsoleKey.NumPad1)
     {
         Console.Clear();
-
         adminBackend.PrepDatabase();
-
         Console.WriteLine("Database deleted, created and seeded");
-
         Console.ReadKey();
     }
 
@@ -44,20 +29,16 @@ while (adminMenu)
         Console.Clear();
 
         var users = adminBackend.GetAllCostumers();
-
+        
         Console.WriteLine("This is all registered users: ");
 
         foreach (var u in users)
         {
             Console.WriteLine("Name: " + u.Name);
             if (u.IsBanned == true)
-            {
                 Console.WriteLine("Banned: Yes" + "\n");
-            }
             else
-            {
                 Console.WriteLine("Banned: No" + "\n");
-            }
         }
 
         Console.ReadKey();
@@ -69,10 +50,7 @@ while (adminMenu)
 
         var restaurants = userBackend.GetRestaurants();
 
-        foreach (var r in restaurants)
-        {
-            Console.WriteLine($"Restaurantname: {r.Name}\n");
-        }
+        foreach (var r in restaurants) Console.WriteLine($"Restaurantname: {r.Name}\n");
 
         Console.ReadKey();
     }
@@ -81,7 +59,7 @@ while (adminMenu)
     {
         Console.Clear();
 
-        while (true) 
+        while (true)
         {
             Console.WriteLine("Type restaurantname or press [0] to go back to menu");
             var name = Console.ReadLine();
@@ -92,17 +70,11 @@ while (adminMenu)
                 continue;
             }
 
-            if (name == "0")
-            {
-                break;
-            }
+            if (name == "0") break;
 
             Console.WriteLine("Type phonenumber (optional)");
             var phone = Console.ReadLine();
-            if (phone == "")
-            {
-                phone = null;
-            }
+            if (phone == "") phone = null;
 
             adminBackend.AddRestaurant(name, phone);
             Console.Clear();
@@ -112,7 +84,6 @@ while (adminMenu)
             var keyInput = Console.ReadKey();
 
             if (keyInput.Key != ConsoleKey.D0 || keyInput.Key != ConsoleKey.NumPad0) break;
-
         }
     }
 
@@ -129,14 +100,15 @@ while (adminMenu)
             {
                 Console.WriteLine($"[{restaurantnumber}]\n" +
                                   $"Restaurantname: {r.Name}\n" +
-                                  $"-----------------------------------");
+                                  "-----------------------------------");
                 restaurantnumber++;
             }
 
             Console.WriteLine("Type in the restaurantnumber you want to change");
-            if (!Int32.TryParse(Console.ReadLine(), out int selectedRestaurant) || selectedRestaurant > restaurants.Count)
+            if (!int.TryParse(Console.ReadLine(), out var selectedRestaurant) || selectedRestaurant > restaurants.Count)
             {
-                Console.WriteLine("Restaurantnumber not found. Press [0] to go back to menu or any other key to try again");
+                Console.WriteLine(
+                    "Restaurantnumber not found. Press [0] to go back to menu or any other key to try again");
                 if (Console.ReadKey().Key == ConsoleKey.D0 || Console.ReadKey().Key == ConsoleKey.NumPad0) break;
                 continue;
             }
@@ -146,8 +118,7 @@ while (adminMenu)
             Console.WriteLine(restaurantObjekt.Name);
             Console.ReadKey();
         }
-        
+
         Console.ReadKey();
     }
-
 }
