@@ -25,7 +25,7 @@ namespace DataLayer.Backend
         {
             var ctx = new FoodpackDbContext();
 
-            var query = ctx.Costumers
+            var query = ctx.Users
                 .Include(b => b.Ban)
                 .OrderBy(c => c.Id)
                 .ToList();
@@ -37,7 +37,7 @@ namespace DataLayer.Backend
         {
             var ctx = new FoodpackDbContext();
 
-            var query = ctx.Costumers
+            var query = ctx.Users
                 .Include(b=> b.Ban)
                 .Where(c => c == user)
                 .FirstOrDefault();
@@ -50,16 +50,27 @@ namespace DataLayer.Backend
             ctx.SaveChanges();
         }
 
+        private User GenerateRestaurantLogin(Restaurant restaurant)
+        {
+            var output = new User()
+            {
+                Name = restaurant.Name,
+                Username = restaurant.Name+"Username",
+                Password = restaurant.Name + "Password"
+            };
+            return output;
+        }
+
         public void AddRestaurant(string name, string phone)
         {
             var ctx = new FoodpackDbContext();
 
             var newRestaurant = new Restaurant() { Name = name, Phonenumber = phone };
-
+            newRestaurant.User = GenerateRestaurantLogin(newRestaurant);
             ctx.Add(newRestaurant);
             ctx.SaveChanges();
 
-            }
+        }
 
         public void LiftBanCostumer(User user)
         {
@@ -73,7 +84,7 @@ namespace DataLayer.Backend
             {
                 ban.BannedLift = DateTime.Today;
 
-                var query = ctx.Costumers
+                var query = ctx.Users
                     .Include(b => b.Ban)
                     .Where(c => c == user)
                     .FirstOrDefault();
