@@ -25,7 +25,7 @@ namespace DataLayer.Backend
         {
             var ctx = new FoodpackDbContext();
 
-            var query = ctx.Costumers
+            var query = ctx.Users
                 .Include(b => b.Ban)
                 .OrderBy(c => c.Id)
                 .ToList();
@@ -37,7 +37,7 @@ namespace DataLayer.Backend
         {
             var ctx = new FoodpackDbContext();
 
-            var query = ctx.Costumers
+            var query = ctx.Users
                 .Include(b=> b.Ban)
                 .Where(c => c == user)
                 .FirstOrDefault();
@@ -73,7 +73,7 @@ namespace DataLayer.Backend
             {
                 ban.BannedLift = DateTime.Today;
 
-                var query = ctx.Costumers
+                var query = ctx.Users
                     .Include(b => b.Ban)
                     .Where(c => c == user)
                     .FirstOrDefault();
