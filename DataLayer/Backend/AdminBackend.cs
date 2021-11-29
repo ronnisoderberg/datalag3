@@ -12,18 +12,25 @@ namespace DataLayer.Backend
 {
     public class AdminBackend
     {
-        public void PrepDatabase()
-        {
-            using var ctx = new FoodpackDbContext();
+        private DbContextOptions options;
 
-            ctx.Database.EnsureDeleted();
-            ctx.Database.EnsureCreated();
-            ctx.Seed();
+        public AdminBackend(DbContextOptions options)
+        {
+            this.options = options;
         }
+
+        //public void PrepDatabase()
+        //{
+        //    using var ctx = new FoodpackDbContext(options);
+
+        //    ctx.Database.EnsureDeleted();
+        //    ctx.Database.EnsureCreated();
+        //    ctx.Seed();
+        //}
 
         public List<User> GetAllCostumers()
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Users
                 .Include(b => b.Ban)
@@ -35,7 +42,7 @@ namespace DataLayer.Backend
 
         public void BanCostumer(User user, string reason)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Users
                 .Include(b=> b.Ban)
@@ -63,7 +70,7 @@ namespace DataLayer.Backend
 
         public void AddRestaurant(string name, string phone)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var newRestaurant = new Restaurant() { Name = name, Phonenumber = phone };
             newRestaurant.User = GenerateRestaurantLogin(newRestaurant);
@@ -74,7 +81,7 @@ namespace DataLayer.Backend
 
         public void LiftBanCostumer(User user)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var ban = ctx.Bans
                 .Where(c => c.User == user && c.BannedLift == null)

@@ -5,16 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using DataLayer.Backend;
 using DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.FoodPackAdder
 {
     public class FoodPackAdd
     {
+        private DbContextOptions options;
+        public FoodPackAdd(DbContextOptions options)
+        {
+            this.options = options;
+        }
         private ConsoleHelp help = new ConsoleHelp();
-        private RestaurantBackend restaurantBackend = new RestaurantBackend();
 
         public void NewFoodPack(Restaurant restaurant)
         {
+            var restaurantBackend = new RestaurantBackend(options);
             string description = FoodPackDescription.SetFoodPackDescription();
 
             int price = FoodPackPrice.SetFoodPackPrice();

@@ -6,16 +6,23 @@ using DataLayer;
 using DataLayer.Backend;
 using DataLayer.FoodPackAdder;
 using DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+
+var optionsBuilder = new DbContextOptionsBuilder();
+optionsBuilder.UseSqlServer(
+    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackLiveDbContext");
+
+Login login = new Login(optionsBuilder.Options);
+
 
 
 StandardMessages message = new StandardMessages();
-RestaurantBackend restaurantBackend = new RestaurantBackend();
+RestaurantBackend restaurantBackend = new RestaurantBackend(optionsBuilder.Options);
 Restaurant restaurant = new Restaurant();
 ConsoleHelp help = new ConsoleHelp();
 
 User user;
-Login login = new Login();
 ConsoleKeyInfo input;
 
 while (true)
@@ -126,7 +133,7 @@ while (true)
             var rest = restaurantBackend.GetRestaurantInfo(restaurant.Id);
 
             Console.WriteLine($"You are logged in as restaurant: {rest.Name} with ID: {rest.Id}.");
-            var adder = new FoodPackAdd();
+            var adder = new FoodPackAdd(optionsBuilder.Options);
             adder.NewFoodPack(restaurant);
 
 
@@ -155,6 +162,21 @@ while (true)
 
 
 
+/*todo skapa klass för innan login och efter login,
+i menyvalen sen istället kalla på metoder där all kod finns istället?????
 
-//todo skapa klass för innan login och efter login,
-//i menyvalen sen istället kalla på metoder där all kod finns istället?????
+tittade på en video, det fanns två st program.cs
+ena internal static void main() där det anslöts till en database
+
+och sen en program.cs som hade UI osv? varför
+
+
+du gjorde konstruktor i database.cs som tar in options.
+behöver man göra en sån för varje backend project?(userbackend/adminbackend etc)
+
+Restaurant manager - går det bra att man gör ett konto till själva restaurangen
+istället för att koppla en viss user till restaurangen(det är ändå typ detat vi gör)
+-skapar en användare när restaurangen skapas, med restaurangens login uppgifter
+
+
+*/

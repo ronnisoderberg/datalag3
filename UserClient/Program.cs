@@ -1,14 +1,19 @@
 ﻿using System.Threading.Channels;
 using DataLayer.Backend;
 using DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 
 bool loop = true;
 int input;
 int idVal;
+var optionsBuilder = new DbContextOptionsBuilder();
+optionsBuilder.UseSqlServer(
+    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackLiveDbContext");
 
-var resturant = new RestaurantBackend();
-var user = new UserBackend();
+
+var resturant = new RestaurantBackend(optionsBuilder.Options);
+var user = new UserBackend(optionsBuilder.Options);
 var userlogin = user.GetCostumer(1);
 
 while (loop)

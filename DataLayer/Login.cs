@@ -6,15 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using DataLayer.Data;
 using DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer
 {
+   
     public class Login
     {
+        private DbContextOptions options;
+
+        public Login(DbContextOptions options)
+        {
+            this.options = options;
+        }
 
         public UserAcces CheckUserAcces(User user)
         {
-            using var ctx = new FoodpackDbContext();
+            using var ctx = new FoodpackDbContext(options);
 
             if (user.IsAdmin == true)
                 return UserAcces.Admin;
@@ -26,7 +34,7 @@ namespace DataLayer
         }
         public User TryLogin(string username, string password)//todo make password case sensitive
         {
-            using var ctx = new FoodpackDbContext();
+            using var ctx = new FoodpackDbContext(options);
 
             return ctx.Users.FirstOrDefault(user => user.Username == username && user.Password == password);
         }

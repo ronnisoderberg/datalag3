@@ -1,16 +1,22 @@
-﻿    using DataLayer.Backend;
+﻿    using DataLayer;
+    using DataLayer.Backend;
 using DataLayer.Model;
+    using Microsoft.EntityFrameworkCore;
 
-namespace ConsoleApp
+    namespace ConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-          
-            var userBackend = new UserBackend();
-            var adminBackend = new AdminBackend();
-            var restaurantBackend = new RestaurantBackend();
+            var optionsBuilder = new DbContextOptionsBuilder();
+            optionsBuilder.UseSqlServer(
+                "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackLiveDbContext");
+
+            var database = new Database(optionsBuilder.Options);
+            var userBackend = new UserBackend(optionsBuilder.Options);
+            var adminBackend = new AdminBackend(optionsBuilder.Options);
+            var restaurantBackend = new RestaurantBackend(optionsBuilder.Options);
 
             while (true)
             {
@@ -31,7 +37,7 @@ namespace ConsoleApp
 
                 if (keyInfo == "1")
                 {
-                    adminBackend.PrepDatabase();
+                    database.PrepDatabase();
                     Console.WriteLine("Database deleted and created.");
                     Console.ReadLine();
                     Console.Clear();
