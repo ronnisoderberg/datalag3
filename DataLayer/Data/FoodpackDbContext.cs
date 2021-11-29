@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer.Backend;
@@ -31,6 +32,13 @@ namespace DataLayer.Data
             }
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasIndex(user => user.Username)
+                .IsUnique();
+        }
+
         public void Seed() 
         {
             var users = new List<User>
@@ -41,15 +49,18 @@ namespace DataLayer.Data
                 new() {Name = "Elin Eriksson" ,Username = "EEriksson", Password = "Elin123"},
                 new() {Name = "Frida Fredriksson" ,Username = "FFredriksson", Password = "Frida123" },
                 new() {Name = "Gerd Götesson" ,Username = "GGötesson", Password = "Gerd123"},
+                new() {Name = "Max",Username = "MaxUsername", Password = "MaxPassword"},
                 new() {Name = "McDonalds",Username = "McDonaldsUsername", Password = "McDonaldsPassword"},
                 new() {Name = "Subway",Username = "SubwayUsername", Password = "SubwayPassword"},
                 new() {Name = "Starbucks",Username = "StarbucksUsername", Password = "StarbucksPassword"},
+                new() {Name = "Admin",Username = "AdminUsername", Password = "AdminPassword", IsAdmin = true},
+
             };
             AddRange(users);
 
             var restaurants = new List<Restaurant>
             {
-                new() {Name = "Max", Phonenumber = "035102030"},
+                new() {Name = "Max", Phonenumber = "035102030", User = users[6]},
                 new() {Name = "McDonalds" , Phonenumber = "03512345", User = users[7]},
                 new() {Name = "Subway", User = users[8]},
                 new() {Name = "Starbucks", User = users[9]},

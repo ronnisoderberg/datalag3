@@ -12,10 +12,6 @@ namespace TestFoodacks
         {
             var startNseed = new AdminBackend();
             startNseed.PrepDatabase();
-            
-
-
-
         }
         [Fact]
         public void Test1()

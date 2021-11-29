@@ -11,86 +11,110 @@ var restaurant = new RestaurantBackend();
 int id = 2;
 ConsoleKeyInfo input;
 
+bool signedIn = false;
 
 while (true)
 {
     Console.Clear();
-    ColorWriteLine("-------Welcome-------\n","blue");
+    ColorWriteLine("-------Welcome-------\n", "blue");
 
-    Console.WriteLine("[1] Get all sold foodpackages");
-    Console.WriteLine("[2] Get all unsold foodpackages");
-    Console.WriteLine("[3] Add new foodpackage");
-   
-    ColorWriteLine("\n[0] Exit","red");
+    Console.WriteLine("[1] Login as a restaurant");
+    Console.WriteLine("[2] Register as a representant of a restaurant");
 
+    ColorWriteLine("\n[0] Exit", "red");
 
     input = Console.ReadKey(true);
 
     if (input.Key == ConsoleKey.D1 || input.Key == ConsoleKey.NumPad1)
     {
-        Console.Clear();
-        ColorWriteLine("-------Sold Packages-------\n", "blue");
-        var list = restaurant.GetSoldFoodpacks(id);
-
-
-        if (list.Count < 1)
-            Console.WriteLine("The restaurant has not sold any foodpackages yet.");
-        else
-            list.ForEach(x=> Console.WriteLine(x.ToString()));
-            
-
-        ColorWriteLine("\nPress any key to return to the menu", "yellow");
-        Console.ReadKey();
 
     }
 
-    if (input.Key == ConsoleKey.D2 || input.Key == ConsoleKey.NumPad2)
+
+    while (signedIn)
     {
         Console.Clear();
-       
-        ColorWriteLine("-------Unsold Packages-------\n", "blue");
-        var list = restaurant.GetUnSoldFoodpacks(id);
+        ColorWriteLine("-------Welcome-------\n", "blue");//todo
 
-        if (list.Count < 1)
-            Console.WriteLine("The restaurant does not have any unsold foodboxes.");
-        else
-            list.ForEach(x => Console.WriteLine(x.ToString()));
+        Console.WriteLine("[1] Get all sold foodpackages");
+        Console.WriteLine("[2] Get all unsold foodpackages");
+        Console.WriteLine("[3] Add new foodpackage");
 
-            
-        ColorWriteLine("\nPress any key to return to the menu","yellow");
-        Console.ReadKey();
-
-    }
-    if (input.Key == ConsoleKey.D3 || input.Key == ConsoleKey.NumPad3)
-    {
-        Console.Clear();
-        ColorWriteLine("-------Add new package-------\n","blue");
-        var rest = restaurant.GetRestaurantInfo(id);
-
-        Console.WriteLine($"You are logged in as restaurant: {rest.Name} with ID: {rest.Id}.");
-
-        NewFoodPack();
+        ColorWriteLine("\n[0] Sign Out", "red");
 
 
-        ColorWriteLine("\nPress any key to return to the menu","yellow");
-        Console.ReadKey();
+        input = Console.ReadKey(true);
 
-    } 
-    if (input.Key == ConsoleKey.D0 || input.Key == ConsoleKey.NumPad0)
-    {
-        Console.Clear();
-        Console.WriteLine("Are you sure you want to exit? y/n");
-        input = Console.ReadKey();
-        if (input.Key == ConsoleKey.Y)
+        if (input.Key == ConsoleKey.D1 || input.Key == ConsoleKey.NumPad1)
         {
-            break;
+            Console.Clear();
+            ColorWriteLine("-------Sold Packages-------\n", "blue");
+            var list = restaurant.GetSoldFoodpacks(id);
+
+
+            if (list.Count < 1)
+                Console.WriteLine("The restaurant has not sold any foodpackages yet.");
+            else
+                list.ForEach(x => Console.WriteLine(x.ToString()));
+
+
+            ColorWriteLine("\nPress any key to return to the menu", "yellow");
+            Console.ReadKey();
+
         }
-        if (input.Key == ConsoleKey.N)
+
+        if (input.Key == ConsoleKey.D2 || input.Key == ConsoleKey.NumPad2)
         {
-            continue;
+            Console.Clear();
+
+            ColorWriteLine("-------Unsold Packages-------\n", "blue");
+            var list = restaurant.GetUnSoldFoodpacks(id);
+
+            if (list.Count < 1)
+                Console.WriteLine("The restaurant does not have any unsold foodboxes.");
+            else
+                list.ForEach(x => Console.WriteLine(x.ToString()));
+
+
+            ColorWriteLine("\nPress any key to return to the menu", "yellow");
+            Console.ReadKey();
+
+        }
+        if (input.Key == ConsoleKey.D3 || input.Key == ConsoleKey.NumPad3)
+        {
+            Console.Clear();
+            ColorWriteLine("-------Add new package-------\n", "blue");
+            var rest = restaurant.GetRestaurantInfo(id);
+
+            Console.WriteLine($"You are logged in as restaurant: {rest.Name} with ID: {rest.Id}.");
+
+            NewFoodPack();
+
+
+            ColorWriteLine("\nPress any key to return to the menu", "yellow");
+            Console.ReadKey();
+
+        }
+        if (input.Key == ConsoleKey.D0 || input.Key == ConsoleKey.NumPad0)
+        {
+            Console.Clear();
+            Console.WriteLine("Are you sure you want to exit? y/n");
+            input = Console.ReadKey();
+            if (input.Key == ConsoleKey.Y)
+            {
+                break;
+            }
+            if (input.Key == ConsoleKey.N)
+            {
+                continue;
+            }
         }
     }
 }
+
+
+
+
 
 
 #region NewFoodPackMethods

@@ -21,6 +21,13 @@ namespace DataLayer.Model
         public ICollection<Foodattribute> Foodattribute { get; set; }
 
 
+        /*
+         * Det kan vara samma loginklass som sköter det
+        men det skulle kunna vara tre loginmetoder
+        där den i ManagerLogin och AdminLogin kallar på CustomerLogin men sen dubbelkollar 
+        att användaren också är en Manager/Admin innan den returnerar
+         */
+
         public override string ToString()
         {
             return 
