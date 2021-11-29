@@ -30,8 +30,8 @@ namespace DataLayer.Backend
         {
             var ctx = new FoodpackDbContext();
 
-            //costumer is set to ID 1
-            var order = new Order() { OrderDate = DateTime.Today, Costumer = ctx.Costumers.Find(1)};
+            //user is set to ID 1
+            var order = new Order() { OrderDate = DateTime.Today, User = ctx.Costumers.Find(1)};
             double orderPriceSum = 0;
 
             foreach (var o in orderlist)

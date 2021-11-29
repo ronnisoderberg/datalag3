@@ -21,7 +21,7 @@ namespace DataLayer.Backend
             ctx.Seed();
         }
 
-        public List<Costumer> GetAllCostumers()
+        public List<User> GetAllCostumers()
         {
             var ctx = new FoodpackDbContext();
 
@@ -33,16 +33,16 @@ namespace DataLayer.Backend
             return query;
         }
 
-        public void BanCostumer(Costumer costumer, string reason)
+        public void BanCostumer(User user, string reason)
         {
             var ctx = new FoodpackDbContext();
 
             var query = ctx.Costumers
                 .Include(b=> b.Ban)
-                .Where(c => c == costumer)
+                .Where(c => c == user)
                 .FirstOrDefault();
 
-            var ban = new Ban() {Costumer = query, Reason = reason};
+            var ban = new Ban() {User = query, Reason = reason};
 
             query.Ban.Add(ban);
 
@@ -61,12 +61,12 @@ namespace DataLayer.Backend
 
             }
 
-        public void LiftBanCostumer(Costumer costumer)
+        public void LiftBanCostumer(User user)
         {
             var ctx = new FoodpackDbContext();
 
             var ban = ctx.Bans
-                .Where(c => c.Costumer == costumer && c.BannedLift == null)
+                .Where(c => c.User == user && c.BannedLift == null)
                 .FirstOrDefault();
 
             if (ban != null)
@@ -75,7 +75,7 @@ namespace DataLayer.Backend
 
                 var query = ctx.Costumers
                     .Include(b => b.Ban)
-                    .Where(c => c == costumer)
+                    .Where(c => c == user)
                     .FirstOrDefault();
 
                 query.IsBanned = false;
