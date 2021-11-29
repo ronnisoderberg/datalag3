@@ -13,7 +13,7 @@ namespace DataLayer.Model
         [Required] public DateTime OrderDate { get; set; } 
         public double OrderSum { get; set; }
 
-        [Required] public Costumer Costumer { get; set; }
+        [Required] public User User { get; set; }
          public ICollection<Foodpackage> Foodpackage { get; set; }
 
     }

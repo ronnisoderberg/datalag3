@@ -14,6 +14,6 @@ namespace DataLayer.Model
         [Required] public DateTime BannedDate { get; set; } = DateTime.Today;
         public DateTime? BannedLift { get; set; } 
 
-        [Required] public Costumer Costumer { get; set; } 
+        [Required] public User User { get; set; } 
     }
 }

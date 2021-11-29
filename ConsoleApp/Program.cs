@@ -21,10 +21,10 @@ namespace ConsoleApp
                 Console.WriteLine("3 : Print all sold objects from restaurant");
                 Console.WriteLine("4 : Add new foodpack as restaurant");
                 Console.WriteLine("5 : Print all costumers");
-                Console.WriteLine("6 : Ban costumer by username");
+                Console.WriteLine("6 : Ban user by username");
                 Console.WriteLine("7 : See all restaurants & Add new");
                 Console.WriteLine("8 : See monthly profit for a restaurant ");
-                Console.WriteLine("9 : Lift a ban from costumer ");
+                Console.WriteLine("9 : Lift a ban from user ");
                 Console.WriteLine("10 : View food with attributes");
 
                 var keyInfo = Console.ReadLine();
@@ -348,7 +348,7 @@ namespace ConsoleApp
 
                     var users = adminBackend.GetAllCostumers();
                     var usernumber = 1;
-                    var bannedCosumers = new List<Costumer>();
+                    var bannedCosumers = new List<User>();
 
                     Console.WriteLine("Select a user number to lift ban");
 
