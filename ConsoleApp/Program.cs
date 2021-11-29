@@ -158,7 +158,7 @@ namespace ConsoleApp
                         Console.WriteLine($"Number: {restaurantnumber}\n" +
                                           $"Name: {r.Name}\n" +
                                           $"Phonenumber: {r.Phonenumber}\n");
-                        ;
+                        
                         restaurantnumber++;
                     }
 

@@ -7,11 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{0728DB49-A9EE-4C41-90C1-19D76EEFDEC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserClient", "UserClient\UserClient.csproj", "{B3260139-EA26-4658-8846-7D3A8C503349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserClient", "UserClient\UserClient.csproj", "{B3260139-EA26-4658-8846-7D3A8C503349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantClient", "RestaurantClient\RestaurantClient.csproj", "{6FAD63B5-5ED6-44B1-8C4D-B164CE1B98DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantClient", "RestaurantClient\RestaurantClient.csproj", "{6FAD63B5-5ED6-44B1-8C4D-B164CE1B98DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminClient", "AdminClient\AdminClient.csproj", "{23D89B71-7022-4A5E-B75F-03CC5A8DB8D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminClient", "AdminClient\AdminClient.csproj", "{23D89B71-7022-4A5E-B75F-03CC5A8DB8D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7C9C0CB-F9CA-4ABC-8DE6-4AA952639D5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFoodacks", "TestFoodacks\TestFoodacks.csproj", "{62D6D780-C65F-44E0-ACB9-9F292FF55544}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{23D89B71-7022-4A5E-B75F-03CC5A8DB8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23D89B71-7022-4A5E-B75F-03CC5A8DB8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23D89B71-7022-4A5E-B75F-03CC5A8DB8D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D6D780-C65F-44E0-ACB9-9F292FF55544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D6D780-C65F-44E0-ACB9-9F292FF55544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D6D780-C65F-44E0-ACB9-9F292FF55544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D6D780-C65F-44E0-ACB9-9F292FF55544}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{62D6D780-C65F-44E0-ACB9-9F292FF55544} = {F7C9C0CB-F9CA-4ABC-8DE6-4AA952639D5B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2995378B-58D8-4A21-B10D-B0E70957592B}
