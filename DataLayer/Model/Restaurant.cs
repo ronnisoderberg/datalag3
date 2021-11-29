@@ -14,6 +14,7 @@ namespace DataLayer.Model
         public string Phonenumber { get; set; }
 
         public ICollection<Foodpackage> Foodpackage { get; set; }
+        [Required] public User User { get; set; }
 
     }
 }
