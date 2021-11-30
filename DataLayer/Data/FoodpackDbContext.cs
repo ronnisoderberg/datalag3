@@ -42,6 +42,7 @@ namespace DataLayer.Data
                 new() {Name = "Frida Fredriksson" ,Username = "FFredriksson", Password = "Frida123" },
                 new() {Name = "Gerd Götesson" ,Username = "GGötesson", Password = "Gerd123"},
                 new() {Name = "McDonalds",Username = "McDonaldsUsername", Password = "McDonaldsPassword"},
+                new() {Name = "Max",Username = "MaxUsername", Password = "MaxPassword"},
                 new() {Name = "Subway",Username = "SubwayUsername", Password = "SubwayPassword"},
                 new() {Name = "Starbucks",Username = "StarbucksUsername", Password = "StarbucksPassword"},
             };
@@ -49,7 +50,7 @@ namespace DataLayer.Data
 
             var restaurants = new List<Restaurant>
             {
-                new() {Name = "Max", Phonenumber = "035102030"},
+                new() {Name = "Max", Phonenumber = "035102030", User = users[6]},
                 new() {Name = "McDonalds" , Phonenumber = "03512345", User = users[7]},
                 new() {Name = "Subway", User = users[8]},
                 new() {Name = "Starbucks", User = users[9]},

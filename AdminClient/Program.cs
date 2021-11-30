@@ -113,6 +113,7 @@ while (true)
                 continue;
             }
 
+             //ej färdig, fortsätt på vad som ska ändras
             var restaurantObjekt = restaurants.ElementAtOrDefault(selectedRestaurant - 1);
 
             Console.WriteLine(restaurantObjekt.Name);
