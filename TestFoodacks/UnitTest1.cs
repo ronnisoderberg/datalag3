@@ -155,6 +155,37 @@ namespace TestFoodacks
             Assert.Equal(sold.Count, soldCount+1);
 
         }
+        [Fact]
+        public void CheckFood()
+        {
+            //arrange
+            var adminBackend = new AdminBackend(options);
+            var resturantBackend = new RestaurantBackend(options);
+            string testVariabel = "testfoods";
+
+            adminBackend.AddRestaurant("testRestaurang","123");
+            Restaurant restaurant;
+            using (var ctx = new FoodpackDbContext(options))
+            {
+                restaurant = ctx.Restaurants.FirstOrDefault(x=> x.Name == "testRestaurang");
+            }
+            var foodInDatabase = resturantBackend.GetUnSoldFoodpacks(restaurant.Id);
+
+            Assert.Empty(foodInDatabase);
+
+            //act
+            resturantBackend.AddFoodpack(15, DateTime.Now, testVariabel, restaurant.Id, "meat");
+            foodInDatabase = resturantBackend.GetUnSoldFoodpacks(restaurant.Id);
+
+            //assert
+
+            Assert.NotEmpty(foodInDatabase);
+
+
+
+
+        }
+
 
 
     }
