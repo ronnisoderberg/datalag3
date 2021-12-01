@@ -59,7 +59,7 @@ namespace TestFoodacks
         }
 
         [Fact]
-        //test som testar användares accesslevel
+        //test som testar anvï¿½ndares accesslevel
         public void UserAccesTest()
         {
             Login login = new Login(options);
@@ -107,7 +107,7 @@ namespace TestFoodacks
         }
 
         [Fact]
-        //test som testar några metoder i RestaurantBackend
+        //test som testar nï¿½gra metoder i RestaurantBackend
         public void RestauarntBackendTests()
         {
             var restaurantBackend = new RestaurantBackend(options);
@@ -155,7 +155,25 @@ namespace TestFoodacks
             Assert.Equal(sold.Count, soldCount+1);
 
         }
+      [Fact]
+        public void AddFood()
+        {
+            //arrange
+            var resturantBackend = new RestaurantBackend(options);
+            string testVariabel = "testfoods";
 
 
+            //act
+            resturantBackend.AddFoodpack(15, DateTime.Now, testVariabel, 1, "meat");
+            var foodInDatabase = resturantBackend.GetUnSoldFoodpacks().Find(x => x.Description == testVariabel);
+
+            //assert
+
+            Assert.NotNull(foodInDatabase);
+
+
+
+
+        }
     }
 }
