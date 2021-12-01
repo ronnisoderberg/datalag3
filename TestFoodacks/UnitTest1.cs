@@ -59,7 +59,7 @@ namespace TestFoodacks
         }
 
         [Fact]
-        //test som testar användares accesslevel
+        //test som testar anvï¿½ndares accesslevel
         public void UserAccesTest()
         {
             Login login = new Login(options);
@@ -107,7 +107,7 @@ namespace TestFoodacks
         }
 
         [Fact]
-        //test som testar några metoder i RestaurantBackend
+        //test som testar nï¿½gra metoder i RestaurantBackend
         public void RestauarntBackendTests()
         {
             var restaurantBackend = new RestaurantBackend(options);
