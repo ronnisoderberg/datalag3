@@ -21,8 +21,9 @@ namespace TestFoodacks
             database.PrepDatabase();
             database.SeedTestData();
         }
+
         [Fact]
-        public void Test1()
+        public void AddRestaurant()
         {
             var adminBackend = new AdminBackend(options);
             var userbackend = new UserBackend(options);
