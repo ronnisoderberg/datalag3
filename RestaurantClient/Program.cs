@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RestaurantClient.views;
+﻿using RestaurantClient.views;
 
 
 MainScreen.RunMainScreen();

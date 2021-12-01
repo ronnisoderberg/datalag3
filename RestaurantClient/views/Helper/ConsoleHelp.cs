@@ -55,5 +55,10 @@ namespace DataLayer
                 Console.SetCursorPosition(0, Console.CursorTop);
             }
         }
+        public static ConsoleKeyInfo GetMenuChoice()
+        {
+            ConsoleKeyInfo input = Console.ReadKey(true);
+            return input;
+        }
     }
 }

@@ -54,19 +54,18 @@ namespace RestaurantClient.views
                 list.ForEach(x => Console.WriteLine(x.ToString()));
 
 
-            ConsoleHelp.ColorWriteLine("\nPress any key to return to the menu", "yellow");
-            Console.ReadKey();
+            StandardMessages.ReturnMessage();
 
         }
         public static void UnSoldPacksChoice(Restaurant restaurant, RestaurantBackend restaurantBackend)
         {
             Console.Clear();
-            ConsoleHelp.ColorWriteLine("-------Sold Packages-------\n", "blue");
-            var list = restaurantBackend.GetSoldFoodpacks(restaurant.Id);
+            ConsoleHelp.ColorWriteLine("-------Unsold Packages-------\n", "blue");
+            var list = restaurantBackend.GetUnSoldFoodpacks(restaurant.Id);
 
 
             if (list.Count < 1)
-                Console.WriteLine("The restaurant has not sold any foodpackages yet.");
+                Console.WriteLine("The restaurant has sold all foodpacks.");
             else
                 list.ForEach(x => Console.WriteLine(x.ToString()));
 

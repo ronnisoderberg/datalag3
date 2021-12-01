@@ -14,27 +14,29 @@ namespace RestaurantClient.views
     public class LoginSucces
     {
 
-        public static void LoggedInMenu()
-        {
 
-            Console.WriteLine("[1] Get all sold foodpackages");
-            Console.WriteLine("[2] Get all unsold foodpackages");
-            Console.WriteLine("[3] Add new foodpackage");
-
-            ConsoleHelp.ColorWriteLine("\n[0] Sign Out", "red");
-        }
         public static void AfterLogIn(Restaurant restaurant)
         {
+            StandardMessages.LoginMessage(restaurant);
+
             DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackTestDbContext");
             RestaurantBackend restaurantBackend = new RestaurantBackend(optionsBuilder.Options);
             var packAdder = new FoodPackAdd(optionsBuilder.Options);
+
+
             bool signedIn = true;
             while (signedIn)
             {
-                StandardMessages.LoginMessage(restaurant);
+                
                 ConsoleKeyInfo input;
-                LoggedInMenu();
+
+                StandardMessages.LoginMessage(restaurant);
+
+                LoginMenuChioce.ShowLoginMenu();
+
+
+
                 input = Console.ReadKey(true);
 
                 if (input.Key == ConsoleKey.D1 || input.Key == ConsoleKey.NumPad1)

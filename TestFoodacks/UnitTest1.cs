@@ -25,8 +25,8 @@ namespace TestFoodacks
         [Fact]
         public void AddRestaurant()
         {
-            var adminBackend = new AdminBackend();
-            var userbackend = new UserBackend();
+            var adminBackend = new AdminBackend(options);
+            var userbackend = new UserBackend(options);
             
             adminBackend.AddRestaurant("test", "");
 
