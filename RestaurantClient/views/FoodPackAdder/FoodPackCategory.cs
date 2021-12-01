@@ -8,7 +8,6 @@ namespace DataLayer.FoodPackAdder
 {
     public static  class FoodPackCategory
     {
-        public static ConsoleHelp help = new ConsoleHelp();
         //method to set FoodPack Category
         public static string SetFoodPackCategory()
         {
@@ -21,18 +20,18 @@ namespace DataLayer.FoodPackAdder
             if (!categorys.Any(x => x.Equals(category, StringComparison.OrdinalIgnoreCase)))
             {
 
-                help.ClearLastConsoleLine();
+                ConsoleHelp.ClearLastConsoleLine();
 
 
-                help.ColorWriteLine("The category you have entered is invalid. (Fish/Meat/Veggie)", "red");
+                ConsoleHelp.ColorWriteLine("The category you have entered is invalid. (Fish/Meat/Veggie)", "red");
                 i++;
                 goto SetCategory;
             }
 
-            help.ClearXConsoleLines(i);
+            ConsoleHelp.ClearXConsoleLines(i);
 
             Console.Write("Category:");
-            help.ColorWriteLine(category.ToLower(), "white");
+            ConsoleHelp.ColorWriteLine(category.ToLower(), "white");
             return category;
         }
     }

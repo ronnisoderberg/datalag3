@@ -16,7 +16,6 @@ namespace DataLayer.FoodPackAdder
         {
             this.options = options;
         }
-        private ConsoleHelp help = new ConsoleHelp();
 
         public void NewFoodPack(Restaurant restaurant)
         {
@@ -31,14 +30,14 @@ namespace DataLayer.FoodPackAdder
 
             if (ConfirmFoodPack())
             {
-                help.ClearXConsoleLines(2);
+                ConsoleHelp.ClearXConsoleLines(2);
                 restaurantBackend.AddFoodpack(price, expdate, description, restaurant.Id, category);
-                help.ColorWriteLine("\nNew foodpack added!", "green");
+                ConsoleHelp.ColorWriteLine("\nNew foodpack added!", "green");
             }
             else
             {
-                help.ClearXConsoleLines(2);
-                help.ColorWriteLine("\nFoodpack was not added!", "red");
+                ConsoleHelp.ClearXConsoleLines(2);
+                ConsoleHelp.ColorWriteLine("\nFoodpack was not added!", "red");
             }
 
         }
@@ -46,7 +45,7 @@ namespace DataLayer.FoodPackAdder
 
         bool ConfirmFoodPack()
         {
-            help.ColorWriteLine("\nIs the information correct? y/n", "yellow");
+            ConsoleHelp.ColorWriteLine("\nIs the information correct? y/n", "yellow");
 
 
             return Console.ReadKey(true).Key == ConsoleKey.Y ? true : false;
