@@ -11,15 +11,30 @@ namespace DataLayer.Backend
 {
     public class RestaurantBackend
     {
+        private DbContextOptions options;
 
+        public RestaurantBackend(DbContextOptions options)
+        {
+            this.options = options;
+        }
+
+
+        //requires an User ID
+        //and returns the restaurant that this user is managing
+        public Restaurant GetRestaurant(int userid)
+        {
+            using var ctx = new FoodpackDbContext(options);
+            return ctx.Restaurants.FirstOrDefault(x => x.User.Id == userid);
+        }
+        //returns the restaurant with the given ID
         public Restaurant GetRestaurantInfo(int id)
         {
-            using var ctx = new FoodpackDbContext();
+            using var ctx = new FoodpackDbContext(options);
             return ctx.Restaurants.Find(id);
         }
         public List<Foodpackage> GetSoldFoodpacks(int restaurantId)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Foodpackages
                 .Include(f => f.Order)
@@ -33,7 +48,7 @@ namespace DataLayer.Backend
         }
         public List<Foodpackage> GetUnSoldFoodpacks(int restaurantId)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Foodpackages
                 .Include(f => f.Order)
@@ -48,7 +63,7 @@ namespace DataLayer.Backend
 
         public void AddFoodpack(int price, DateTime expdate, string description, int restaurant, string category)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
             var restaurantObject = ctx.Restaurants
                 .Where(r => r.Id == restaurant)
                 .FirstOrDefault();
@@ -65,7 +80,7 @@ namespace DataLayer.Backend
         }
         public double GetMonthlyProfit(Restaurant restaurant, DateTime date)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Foodpackages
                 .Include(r => r.Restaurant)

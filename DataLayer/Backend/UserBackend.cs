@@ -9,10 +9,15 @@ namespace DataLayer.Backend
 {
     public class UserBackend
     {
+        private DbContextOptions options;
 
+        public UserBackend(DbContextOptions options)
+        {
+            this.options= options;
+        }
         public List<Foodpackage> GetFoodpackages(String category)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Foodpackages
                 .Include(f => f.Category)
@@ -27,7 +32,7 @@ namespace DataLayer.Backend
         }
        public List<Foodpackage> GetFoodpackagesForCostummer(int id)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Foodpackages
                 .Include(f => f.Category)
@@ -45,7 +50,7 @@ namespace DataLayer.Backend
         //Hämtar Objektet användaren med den unika ID nycklen som finns i tabellen. 
         public User GetCostumer(int id)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             return ctx.Users.Find(id);
         }
@@ -53,7 +58,7 @@ namespace DataLayer.Backend
 
         public Order BuyFoodpack(List<Foodpackage> orderlist) 
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             //user is set to ID 1
             var order = new Order() { OrderDate = DateTime.Today, User = ctx.Users.Find(1)};
@@ -78,7 +83,7 @@ namespace DataLayer.Backend
 
         public List<Foodpackage> GetOrderedFood(Order order)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
             var query = ctx.Orders
                 .Include(o => o.Foodpackage)
                 .ThenInclude(f => f.Restaurant)
@@ -90,7 +95,7 @@ namespace DataLayer.Backend
 
         public List<Restaurant> GetRestaurants()
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Restaurants
                 .ToList();

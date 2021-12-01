@@ -3,21 +3,23 @@ using DataLayer;
 using DataLayer.Backend;
 using DataLayer.Data;
 using DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace TestFoodacks
 {
     public class UnitTest1
     {
+        private DbContextOptions options;
         public UnitTest1()
         {
-            var startNseed = new AdminBackend();
-            startNseed.PrepDatabase();
-        }
+            var optionsBuilder = new DbContextOptionsBuilder();
+            optionsBuilder
+                .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackTestDbContext");
 
-        [Fact]
-        public void Test1()
-        {
-
+            options = optionsBuilder.Options;
+            var database = new Database(options);
+            database.PrepDatabase();
+            database.SeedTestData();
         }
 
         [Fact]

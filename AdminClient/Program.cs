@@ -1,8 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DataLayer;
 using DataLayer.Backend;
+using Microsoft.EntityFrameworkCore;
 
-var adminBackend = new AdminBackend();
-var userBackend = new UserBackend();
+
+var optionsBuilder = new DbContextOptionsBuilder();
+optionsBuilder.UseSqlServer(
+    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackTestDbContext");
+
+var database = new Database(optionsBuilder.Options);
+
+var adminBackend = new AdminBackend(optionsBuilder.Options);
+var userBackend = new UserBackend(optionsBuilder.Options);
 
 while (true)
 {
@@ -20,7 +29,9 @@ while (true)
     if (readkey.Key == ConsoleKey.D1 || readkey.Key == ConsoleKey.NumPad1)
     {
         Console.Clear();
-        adminBackend.PrepDatabase();
+        database.PrepDatabase();
+        database.SeedTestData();
+
         Console.WriteLine("Database deleted, created and seeded");
         Console.ReadKey();
     }
