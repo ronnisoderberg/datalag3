@@ -12,7 +12,6 @@ optionsBuilder.UseSqlServer(
     "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackTestDbContext");
 
 
-var resturant = new RestaurantBackend(optionsBuilder.Options);
 var user = new UserBackend(optionsBuilder.Options);
 var userlogin = user.GetCostumer(1);
 
