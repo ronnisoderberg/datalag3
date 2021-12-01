@@ -29,7 +29,8 @@ while (true)
     {
         Console.Clear();
         database.PrepDatabase();
-        database.SeedLiveData();
+        database.SeedTestData();
+
         Console.WriteLine("Database deleted, created and seeded");
         Console.ReadKey();
     }

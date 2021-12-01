@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{480203C3-90A5-4C7A-B1FE-F719E1F2B4B6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{0728DB49-A9EE-4C41-90C1-19D76EEFDEC4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserClient", "UserClient\UserClient.csproj", "{B3260139-EA26-4658-8846-7D3A8C503349}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantClient", "RestaurantClient\RestaurantClient.csproj", "{6FAD63B5-5ED6-44B1-8C4D-B164CE1B98DC}"
@@ -19,6 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestFoodacks", "TestFoodack
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEndProjects", "FrontEndProjects", "{5F62293F-0CA9-4337-B4AC-327CF8204E4C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gruppens rapporter", "Gruppens rapporter", "{2C82CDA0-F651-4F89-9E02-DACBE32E3AEC}"
+	ProjectSection(SolutionItems) = preProject
+		nat.txt = nat.txt
+		ron.txt = ron.txt
+		shk.txt = shk.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +34,6 @@ Global
 		{480203C3-90A5-4C7A-B1FE-F719E1F2B4B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{480203C3-90A5-4C7A-B1FE-F719E1F2B4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{480203C3-90A5-4C7A-B1FE-F719E1F2B4B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0728DB49-A9EE-4C41-90C1-19D76EEFDEC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0728DB49-A9EE-4C41-90C1-19D76EEFDEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0728DB49-A9EE-4C41-90C1-19D76EEFDEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0728DB49-A9EE-4C41-90C1-19D76EEFDEC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B3260139-EA26-4658-8846-7D3A8C503349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B3260139-EA26-4658-8846-7D3A8C503349}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3260139-EA26-4658-8846-7D3A8C503349}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,7 +55,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0728DB49-A9EE-4C41-90C1-19D76EEFDEC4} = {5F62293F-0CA9-4337-B4AC-327CF8204E4C}
 		{B3260139-EA26-4658-8846-7D3A8C503349} = {5F62293F-0CA9-4337-B4AC-327CF8204E4C}
 		{6FAD63B5-5ED6-44B1-8C4D-B164CE1B98DC} = {5F62293F-0CA9-4337-B4AC-327CF8204E4C}
 		{23D89B71-7022-4A5E-B75F-03CC5A8DB8D6} = {5F62293F-0CA9-4337-B4AC-327CF8204E4C}
