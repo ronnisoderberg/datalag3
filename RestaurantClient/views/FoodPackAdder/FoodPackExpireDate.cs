@@ -8,7 +8,6 @@ namespace DataLayer.FoodPackAdder
 {
     public static class FoodPackExpireDate
     {
-        private static ConsoleHelp help = new ConsoleHelp();
         public static DateTime SetFoodPackExpDate()
         {
             int i = 1;
@@ -19,18 +18,18 @@ namespace DataLayer.FoodPackAdder
             if (!DateTime.TryParse(date, out expdate))
             {
 
-                help.ClearLastConsoleLine();
+                ConsoleHelp.ClearLastConsoleLine();
 
 
-                help.ColorWriteLine("The date you have entered is not valid. (yyyy/MM/dd or yyyy-MM-dd)", "red");
+                ConsoleHelp.ColorWriteLine("The date you have entered is not valid. (yyyy/MM/dd or yyyy-MM-dd)", "red");
                 i++;
 
                 goto SetExpDate;
             }
-            help.ClearXConsoleLines(i);
+            ConsoleHelp.ClearXConsoleLines(i);
 
             Console.Write("Expire Date:");
-            help.ColorWriteLine(expdate.ToShortDateString(), "white");
+            ConsoleHelp.ColorWriteLine(expdate.ToShortDateString(), "white");
 
             return expdate;
         }

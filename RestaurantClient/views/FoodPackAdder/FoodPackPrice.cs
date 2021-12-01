@@ -8,7 +8,6 @@ namespace DataLayer.FoodPackAdder
 {
     public static class FoodPackPrice
     {
-        private static ConsoleHelp help = new ConsoleHelp();
         public static int SetFoodPackPrice()
         {
             int i = 1;
@@ -17,16 +16,16 @@ namespace DataLayer.FoodPackAdder
             Console.Write("Enter price in numbers:");
             if (!Int32.TryParse(Console.ReadLine(), out price))
             {
-                help.ClearLastConsoleLine();
+                ConsoleHelp.ClearLastConsoleLine();
 
-                help.ColorWriteLine("The price you have entered is not valid.", "red");
+                ConsoleHelp.ColorWriteLine("The price you have entered is not valid.", "red");
                 i++;
                 goto SetPrice;
             }
-            help.ClearXConsoleLines(i);
+            ConsoleHelp.ClearXConsoleLines(i);
 
             Console.Write("Price:");
-            help.ColorWriteLine(price.ToString(), "white");
+            ConsoleHelp.ColorWriteLine(price.ToString(), "white");
 
             return price;
         }

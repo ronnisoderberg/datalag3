@@ -8,7 +8,6 @@ namespace DataLayer.FoodPackAdder
 {
     public class FoodPackDescription
     {
-        private static ConsoleHelp help = new ConsoleHelp();
         public static string SetFoodPackDescription()
         {
             Console.WriteLine();
@@ -18,19 +17,19 @@ namespace DataLayer.FoodPackAdder
             string description = Console.ReadLine();
             if (description.Length < 2)
             {
-                help.ClearLastConsoleLine();
+                ConsoleHelp.ClearLastConsoleLine();
 
 
-                help.ColorWriteLine("The description you have entered is too short. Please try again.", "red");
+                ConsoleHelp.ColorWriteLine("The description you have entered is too short. Please try again.", "red");
                 i++;
                 goto SetDescription;
             }
 
             //Console.SetCursorPosition(0, Console.CursorTop - 1);
-            help.ClearXConsoleLines(i);
+            ConsoleHelp.ClearXConsoleLines(i);
 
             Console.Write("\nDescription:");
-            help.ColorWriteLine(description, "white");
+            ConsoleHelp.ColorWriteLine(description, "white");
 
             return description;
         }

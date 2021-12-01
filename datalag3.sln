@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gruppens rapporter", "Grupp
 	ProjectSection(SolutionItems) = preProject
 		nat.txt = nat.txt
 		ron.txt = ron.txt
-		shk.txt = shk.txt
+		sheki.md = sheki.md
 	EndProjectSection
 EndProject
 Global

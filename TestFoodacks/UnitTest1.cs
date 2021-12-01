@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Xunit;
 using DataLayer;
 using DataLayer.Backend;
 using DataLayer.Data;
 using DataLayer.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace TestFoodacks
 {
@@ -40,25 +44,149 @@ namespace TestFoodacks
         }
 
         [Fact]
-        public void BuyFood()
+        //test som testar att loginmetoden fungerar 
+        public void LoginTest()
+        {
+            Login login = new Login(options);
+
+            Assert.Null(login.TryLogin("cannotstop","willnotstop"));
+
+            var user = login.TryLogin("AAndersson", "Anna123");
+            Assert.NotNull(user);
+            Assert.Equal("AAndersson",user.Username);
+            Assert.Equal("Anna123",user.Password);
+            Assert.NotEqual(user.Username, "NotAAndedrsson");
+        }
+
+        [Fact]
+        //test som testar anv�ndares accesslevel
+        public void UserAccesTest()
+        {
+            Login login = new Login(options);
+            var adminUser = login.TryLogin("AdminUsername", "AdminPassword");
+            var restaurantUser = login.TryLogin("SubwayUsername", "SubwayPassword");
+            var customerUser = login.TryLogin("AAndersson", "Anna123");
+
+            Assert.NotNull(adminUser);
+            Assert.NotNull(restaurantUser);
+            Assert.NotNull(customerUser);
+
+            var adminAcces = login.CheckUserAcces(adminUser);
+            var managerAcces = login.CheckUserAcces(restaurantUser);
+            var customerAcces = login.CheckUserAcces(customerUser);
+
+            Assert.Equal(UserAcces.Admin,adminAcces);
+            Assert.Equal(UserAcces.Manager,managerAcces);
+            Assert.Equal(UserAcces.Customer,customerAcces);
+
+            Assert.NotEqual(UserAcces.Customer, adminAcces);
+            Assert.NotEqual(UserAcces.Manager, customerAcces);
+            Assert.NotEqual(UserAcces.Admin, managerAcces);
+        }
+
+        [Fact]
+        //test som testar login.GetUsernameMetoden
+        public void GetUsernameTest()
+        {
+            Login login = new Login(options);
+
+            string expected = "AAndersson\r\n";
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            var stringReader = new StringReader(expected);
+            Console.SetIn(stringReader);
+
+            login.GetUsername();
+            Console.WriteLine("AAndersson");
+            var output = stringWriter.ToString().Split(':');
+            Assert.Equal("Username",output[0]);
+            Assert.Equal(expected, output[1]);
+
+        }
+
+        [Fact]
+        //test som testar n�gra metoder i RestaurantBackend
+        public void RestauarntBackendTests()
+        {
+            var restaurantBackend = new RestaurantBackend(options);
+            var userBackend = new UserBackend(options);
+            //GetRestaurant
+            User user;
+            using var ctx = new FoodpackDbContext(options);
+            user = ctx.Users.FirstOrDefault(x => x.Username == "SubwayUsername");
+            
+            Restaurant restaurant = restaurantBackend.GetRestaurant(user.Id);
+            Assert.NotNull(restaurant);
+            Assert.Equal("Subway",restaurant.Name);
+
+            ////////////////////////////////////////////////////////////////////
+            /// 
+            //testar get sold/unsoldFoodpacks + GetMontlyProfit och UserBackend.B
+            var unSold = restaurantBackend.GetUnSoldFoodpacks(restaurant.Id);
+            var sold = restaurantBackend.GetSoldFoodpacks(restaurant.Id);
+
+            var unSoldCount = 1;
+            var soldCount = 2;
+
+            Assert.Equal(unSold.Count,unSoldCount);
+            Assert.Equal(sold.Count,soldCount);
+            
+            double profit = 80;
+            double monthlyProfit = restaurantBackend.GetMonthlyProfit(restaurant, new DateTime(2021, 12, 10));
+            Assert.Equal(profit,monthlyProfit);
+
+            List<Foodpackage> f = new List<Foodpackage>()
+            {
+                ctx.Foodpackages.Find(2)
+            };
+            userBackend.BuyFoodpack(f);
+
+
+            monthlyProfit = restaurantBackend.GetMonthlyProfit(restaurant, new DateTime(2021, 12, 10));
+
+            Assert.NotEqual(profit,monthlyProfit);
+            Assert.Equal(profit+25, monthlyProfit);
+
+            unSold = restaurantBackend.GetUnSoldFoodpacks(restaurant.Id);
+            sold = restaurantBackend.GetSoldFoodpacks(restaurant.Id);
+            Assert.Equal(unSold.Count, unSoldCount-1);
+            Assert.Equal(sold.Count, soldCount+1);
+
+        }
+        [Fact]
+        public void CheckFood()
         {
             //arrange
+            var adminBackend = new AdminBackend(options);
             var resturantBackend = new RestaurantBackend(options);
             string testVariabel = "testfoods";
 
+            adminBackend.AddRestaurant("testRestaurang","123");
+            Restaurant restaurant;
+            using (var ctx = new FoodpackDbContext(options))
+            {
+                restaurant = ctx.Restaurants.FirstOrDefault(x=> x.Name == "testRestaurang");
+            }
+            var foodInDatabase = resturantBackend.GetUnSoldFoodpacks(restaurant.Id);
+
+            Assert.Empty(foodInDatabase);
 
             //act
-            resturantBackend.AddFoodpack(15, DateTime.Now, testVariabel, 1, "meat");
-            var foodInDatabase = resturantBackend.GetUnSoldFoodpacks().Find(x => x.Description == testVariabel);
+            resturantBackend.AddFoodpack(15, DateTime.Now, testVariabel, restaurant.Id, "meat");
+            foodInDatabase = resturantBackend.GetUnSoldFoodpacks(restaurant.Id);
 
             //assert
 
-            Assert.NotNull(foodInDatabase);
+            Assert.NotEmpty(foodInDatabase);
 
 
 
 
         }
+
+
 
     }
 }
