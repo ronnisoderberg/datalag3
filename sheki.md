@@ -1,26 +1,34 @@
 > Detta är en rapport om projektarbetet som utfördes i kursen "**datalagring** *(Win21)*".
 
-## Innehållsförteckning
+## Innehållsförteckning {#innehållsförteckning}
+- [Innehållsförteckning](#innehållsförteckning)
+- [Bakgrund och Inledning](#bakgrundinledning)
+- [Syfte](#syte)
+- [Mål](#mål)
+- [Planering](#planering)
+- [Implementering](#implementering)
+- [Kodstycke](#kodstycke)
+- [Bild](#bild)
 
-## Bakgrund och Inledning
+## Bakgrund och Inledning {#bakgrundinledning}
 Vi har i tidigare uppgifter skapat databaser och hanterat datan i databasen genom LINQ to SQL(database first) och Entity Framework(code first).
 I de tidigare uppgifterna har vi endast arbetat i backenden och till detta projekt skulle vi skapa frontend projekt(GUI) som den användare som kör
 kommer att interagera med. 
-### Syfte
+### Syfte {syfte}
 Syftet med detta projektet var att vi skulle skapa en varsin frontend del till ett program som redan hade en färdig backend del.
 I detta projektarbete har vi fått i uppgift
-### Mål
+### Mål {#mål}
 Målet för projektarbetet var att vi skulle ha utvecklat en varsin fungerande frontend app som interagerar med användaren
 samt utforma tester för de metoder som används i programmet. 
 
-## Planering
+## Planering {#planering}
 Planeringen tycker jag gick bra, vi kommunicerade och pratade i början om hur och vad vi ville göra i projektet.
 Vi valde att i projektet utgå ifrån koden som Natalie skapade till inlämningsuppgift 2. 
 Att vi alla utvecklade olika delar av programmet tycker jag underlättade hela uppgiften eftersom att det var svårt för oss
 att hitta en tid då vi alla kunde sitta tillsammans med uppgiften. 
 Arbetet delas upp på det vis att jag utvecklade RestaurantClient, Ronni utveckalde UserClient och Natalie utvecklade AdminClient projektet.
 
-### Implementering 
+### Implementering {#implementering}
 Eftersom att Natalies sätt att skapa datasen i den tidigare uppgiften skilde sig från mitt sätt så hade jag svårigheter i början att förstå
 hur backend delen fungerade och hur tabellerna i databasen var kopplade till varandra. 
 När jag väl fick kläm på det släppte det och jag började skriva min del i projektet. 
@@ -31,7 +39,7 @@ Det som jag kan träna på och försöka göra bättre till framtiden är att dela upp 
 
 
 Den bit kod som jag blev mest nöjd över är koden som tar in och döljer användarens lösenord
-Koden såg ut så här:
+Koden såg ut så här: {#kodstycke}
 ```csharp
  var password = new StringBuilder();
             Console.Write("Password:");
@@ -59,4 +67,5 @@ Koden såg ut så här:
             }
             Console.WriteLine();
 ```
+{#bild}
 ![password](https://github.com/ronnisoderberg/datalag3/blob/master/hidepassword.png?raw=true)
