@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using System.ComponentModel.DataAnnotations;
+using DataLayer;
 using DataLayer.Backend;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +21,7 @@ while (true)
     Console.WriteLine("[2] Show all users");
     Console.WriteLine("[3] Show all restaurants");
     Console.WriteLine("[4] Add new restaurants and info");
-    Console.WriteLine("[5] Change a restaurants info");
+    Console.WriteLine("[5] Change a restaurants phonenumber");
 
     var readkey = Console.ReadKey();
 
@@ -85,7 +86,6 @@ while (true)
 
             Console.WriteLine("Type phonenumber (optional)");
             var phone = Console.ReadLine();
-            if (phone == "") phone = null;
 
             adminBackend.AddRestaurant(name, phone);
             Console.Clear();
@@ -104,6 +104,8 @@ while (true)
 
         while (true)
         {
+            Console.Clear();
+
             var restaurants = userBackend.GetRestaurants();
             var restaurantnumber = 1;
 
@@ -111,6 +113,7 @@ while (true)
             {
                 Console.WriteLine($"[{restaurantnumber}]\n" +
                                   $"Restaurantname: {r.Name}\n" +
+                                  $"Phone: {r.Phonenumber}\n" +
                                   "-----------------------------------");
                 restaurantnumber++;
             }
@@ -126,7 +129,23 @@ while (true)
 
             var restaurantObjekt = restaurants.ElementAtOrDefault(selectedRestaurant - 1);
 
-            Console.WriteLine(restaurantObjekt.Name);
+            Console.WriteLine("Type in the new phonenumber");
+
+            //No check for numbers/letters..
+            var phone = Console.ReadLine();
+            if (phone == "")
+            {
+                Console.WriteLine("Incorrect phone");
+                continue;
+            }
+
+            restaurantObjekt.Phonenumber = phone;
+
+            adminBackend.UpdateRestaurant(restaurantObjekt);
+
+            Console.Clear();
+
+            Console.WriteLine("Updated to: " + restaurantObjekt.Name + ", " + restaurantObjekt.Phonenumber);
             Console.ReadKey();
         }
 
