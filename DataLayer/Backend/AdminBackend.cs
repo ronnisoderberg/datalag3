@@ -72,6 +72,8 @@ namespace DataLayer.Backend
         {
             var ctx = new FoodpackDbContext(options);
 
+            if (phone == "") phone = null;
+
             var newRestaurant = new Restaurant() { Name = name, Phonenumber = phone };
             newRestaurant.User = GenerateRestaurantLogin(newRestaurant);
             ctx.Add(newRestaurant);
@@ -99,6 +101,18 @@ namespace DataLayer.Backend
                 query.IsBanned = false;
                 ctx.SaveChanges();
             }
+        }
+
+        public void UpdateRestaurant(Restaurant restaurant)
+        {
+            var ctx = new FoodpackDbContext();
+
+            var query = ctx.Restaurants
+                .Where(r => r.Id == restaurant.Id)
+                .FirstOrDefault();
+
+            query.Phonenumber = restaurant.Phonenumber;
+            ctx.SaveChanges();
         }
     }
 }
