@@ -12,30 +12,28 @@ namespace TestFoodacks
         {
             var startNseed = new AdminBackend();
             startNseed.PrepDatabase();
-            
-
         }
+
         [Fact]
         public void Test1()
         {
 
         }
 
-
-        //testa om det läggs in och om phone blir null och inte ""
         [Fact]
-        public void Test()
+        public void AddRestaurant()
         {
             var adminBackend = new AdminBackend();
             var userbackend = new UserBackend();
             
-
-
             adminBackend.AddRestaurant("test", "");
 
             var restaurant = userbackend.GetRestaurants().Find(r => r.Name == "test");
 
             Assert.NotNull(userbackend.GetRestaurants().Find(r => r.Name == "test"));
+
+            Assert.True(userbackend.GetRestaurants().Find(r => r.Name == "test").Phonenumber == null);
+            Assert.False(userbackend.GetRestaurants().Find(r => r.Name == "test").Phonenumber == "");
         }
     }
 }

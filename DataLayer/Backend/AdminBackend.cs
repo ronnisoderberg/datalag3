@@ -95,5 +95,17 @@ namespace DataLayer.Backend
                 ctx.SaveChanges();
             }
         }
+
+        public void UpdateRestaurant(Restaurant restaurant)
+        {
+            var ctx = new FoodpackDbContext();
+
+            var query = ctx.Restaurants
+                .Where(r => r.Id == restaurant.Id)
+                .FirstOrDefault();
+
+            query.Phonenumber = restaurant.Phonenumber;
+            ctx.SaveChanges();
+        }
     }
 }
