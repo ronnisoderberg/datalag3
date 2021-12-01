@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DataLayer
 {
    
-    public class Login
+    public class Login 
     {
         private DbContextOptions options;
 

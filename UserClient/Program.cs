@@ -9,7 +9,7 @@ int input;
 int idVal;
 var optionsBuilder = new DbContextOptionsBuilder();
 optionsBuilder.UseSqlServer(
-    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackLiveDbContext");
+    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackTestDbContext");
 
 
 var resturant = new RestaurantBackend(optionsBuilder.Options);

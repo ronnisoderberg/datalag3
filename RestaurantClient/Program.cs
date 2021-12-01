@@ -11,11 +11,9 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var optionsBuilder = new DbContextOptionsBuilder();
 optionsBuilder.UseSqlServer(
-    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackLiveDbContext");
+    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackTestDbContext");
 
 Login login = new Login(optionsBuilder.Options);
-
-
 
 StandardMessages message = new StandardMessages();
 RestaurantBackend restaurantBackend = new RestaurantBackend(optionsBuilder.Options);

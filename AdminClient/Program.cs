@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 var optionsBuilder = new DbContextOptionsBuilder();
 optionsBuilder.UseSqlServer(
-    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackLiveDbContext");
+    "Data Source=(localdb)\\MSSQLLocalDB;Database=FoodpackTestDbContext");
 
 var database = new Database(optionsBuilder.Options);
 
