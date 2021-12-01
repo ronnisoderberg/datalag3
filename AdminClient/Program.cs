@@ -74,7 +74,6 @@ while (true)
 
             Console.WriteLine("Type phonenumber (optional)");
             var phone = Console.ReadLine();
-            if (phone == "") phone = null;
 
             adminBackend.AddRestaurant(name, phone);
             Console.Clear();

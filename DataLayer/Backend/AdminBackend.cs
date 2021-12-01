@@ -65,6 +65,8 @@ namespace DataLayer.Backend
         {
             var ctx = new FoodpackDbContext();
 
+            if (phone == "") phone = null;
+
             var newRestaurant = new Restaurant() { Name = name, Phonenumber = phone };
             newRestaurant.User = GenerateRestaurantLogin(newRestaurant);
             ctx.Add(newRestaurant);
