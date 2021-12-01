@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 using DataLayer;
 using DataLayer.Backend;
@@ -25,8 +26,8 @@ namespace TestFoodacks
         [Fact]
         public void AddRestaurant()
         {
-            var adminBackend = new AdminBackend();
-            var userbackend = new UserBackend();
+            var adminBackend = new AdminBackend(options);
+            var userbackend = new UserBackend(options);
             
             adminBackend.AddRestaurant("test", "");
 
@@ -37,5 +38,27 @@ namespace TestFoodacks
             Assert.True(userbackend.GetRestaurants().Find(r => r.Name == "test").Phonenumber == null);
             Assert.False(userbackend.GetRestaurants().Find(r => r.Name == "test").Phonenumber == "");
         }
+
+        [Fact]
+        public void BuyFood()
+        {
+            //arrange
+            var resturantBackend = new RestaurantBackend(options);
+            string testVariabel = "testfoods";
+
+
+            //act
+            resturantBackend.AddFoodpack(15, DateTime.Now, testVariabel, 1, "meat");
+            var foodInDatabase = resturantBackend.GetUnSoldFoodpacks().Find(x => x.Description == testVariabel);
+
+            //assert
+
+            Assert.NotNull(foodInDatabase);
+
+
+
+
+        }
+
     }
 }

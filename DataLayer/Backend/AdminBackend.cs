@@ -105,7 +105,7 @@ namespace DataLayer.Backend
 
         public void UpdateRestaurant(Restaurant restaurant)
         {
-            var ctx = new FoodpackDbContext();
+            var ctx = new FoodpackDbContext(options);
 
             var query = ctx.Restaurants
                 .Where(r => r.Id == restaurant.Id)
