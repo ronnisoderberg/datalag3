@@ -35,8 +35,6 @@ namespace TestFoodacks
             
             adminBackend.AddRestaurant("test", "");
 
-            var restaurant = userbackend.GetRestaurants().Find(r => r.Name == "test");
-
             Assert.NotNull(userbackend.GetRestaurants().Find(r => r.Name == "test"));
 
             Assert.True(userbackend.GetRestaurants().Find(r => r.Name == "test").Phonenumber == null);
