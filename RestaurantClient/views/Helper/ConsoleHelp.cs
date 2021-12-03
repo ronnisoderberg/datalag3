@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class ConsoleHelp
+    public static class ConsoleHelp
     {
 
-        public void ColorWriteLine(string s, string color)
+        public static void ColorWriteLine(string s, string color)
         {
             switch (color)
             {
@@ -37,7 +37,7 @@ namespace DataLayer
         }
 
         //clears the last line of text in the console
-       public void ClearLastConsoleLine()
+       public static void ClearLastConsoleLine()
         {
             Console.SetCursorPosition(0, Console.CursorTop - 1);
             Console.Write(new string(' ', Console.WindowWidth));
@@ -45,7 +45,7 @@ namespace DataLayer
         }
         //clears X lines of text from the console
         //accepts amount of lines to clear as parameter
-        public void ClearXConsoleLines(int lines)
+        public static void ClearXConsoleLines(int lines)
         {
 
             for (int j = 0; j < lines; j++)
@@ -54,6 +54,11 @@ namespace DataLayer
                 Console.Write(new string(' ', Console.WindowWidth));
                 Console.SetCursorPosition(0, Console.CursorTop);
             }
+        }
+        public static ConsoleKeyInfo GetMenuChoice()
+        {
+            ConsoleKeyInfo input = Console.ReadKey(true);
+            return input;
         }
     }
 }

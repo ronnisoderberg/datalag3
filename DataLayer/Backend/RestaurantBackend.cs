@@ -91,6 +91,30 @@ namespace DataLayer.Backend
             return query;
 
         }
+        public Order BuyFoodpack(List<Foodpackage> orderlist, User user)
+        {
+            var ctx = new FoodpackDbContext(options);
+
+            //user is set to ID 1
+            var order = new Order() { OrderDate = DateTime.Today, User = ctx.Users.Find(user.Id) };
+            double orderPriceSum = 0;
+
+            foreach (var o in orderlist)
+            {
+                var query = ctx.Foodpackages
+                    .Where(f => f.Id == o.Id)
+                    .FirstOrDefault();
+
+                orderPriceSum += o.Price;
+
+                query.Order = order;
+            }
+
+            order.OrderSum = orderPriceSum;
+
+            ctx.SaveChanges();
+            return order;
+        }
 
 
     }
